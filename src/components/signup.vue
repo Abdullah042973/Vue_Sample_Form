@@ -25,7 +25,7 @@ label{
     font-weight: bold;
     font-size: 1.5em;
     font-family: 'Times New Roman';
-    color: rgb(161, 161, 161);
+    color: #2c3e50;
     margin: 25px 0 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -36,7 +36,7 @@ input{
     width: 100%;
     box-sizing: border-box;
     border: none;
-    border-bottom: 2px solid rgb(206, 206, 206);
+    border-bottom: 1px solid rgb(206, 206, 206);
     color: #555;  
 }
 </style>
