@@ -27,6 +27,12 @@
           <label>Graduation</label>
       </div>
 
+      <label>Skills</label>
+      <input type="text" v-model="tempskills" @keyup.alt="addskills">
+      <div v-for="skill in skills" :key='skill' class="pills">
+        {{ skill }}
+      </div>
+      <label class='note' >Press Alt + ',' to Show the Skills</label>
   </form>
 
   <div class="terms">
@@ -38,8 +44,8 @@
   <p>email: {{ email }}</p>
   <p>password: {{ password }}</p>
   <p>Role: {{ role }} </p>
-  <p>Terms: {{ terms }}</p>
-  <p>Levels: {{ names }}</p>
+  <p>Terms & Condition: {{ terms }}</p>
+  <p>Education: {{ names }}</p>
   </div>
 
 </template>
@@ -52,9 +58,21 @@ export default {
             password: '',
             role: '',
             terms: '',
-            names: []
+            names: [],
+            tempskills: '',
+            skills: []
+            }
+    },
+    methods: {
+        addskills(e) {
+            if (e.key === ',' && this.tempskills){
+                if (!this.skills.includes(this.tempskills)){
+                    this.skills.push(this.tempskills)
+                }
+                this.tempskills = ''
+            }
+        }
     }
-}
 }
 </script>
 
@@ -117,5 +135,23 @@ input[type='checkbox']{
     margin: 0 10px 0 0;
     top: 2px;
 }
-
+.note{
+    display: block;
+    text-align: center;
+    color: rgba(255, 0, 0, 0.548);
+    text-transform: uppercase;
+    font-size: 0.5em;
+}
+.pills{
+    display: inline-block;
+    background: #d2d8dd;
+    color: #2c3e50;
+    padding: 6px 12px;
+    margin: 20px 10px 0 0;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
 </style>
