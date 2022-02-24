@@ -1,10 +1,11 @@
 <template>
-  <form>
+  <form @submit.prevent="formsubmit">
     <label>Email</label>
     <input type="email" required v-model="email" />
 
     <label>Password</label>
     <input type="password" v-model="password" />
+    <div class="error" v-if="passworderror">{{ passworderror }}</div>
 
     <label> Role:</label>
     <select v-model="role">
@@ -15,38 +16,43 @@
 
     <label>Education:</label>
     <div>
-      <input type="checkbox" value="SSC" v-model="names" />
+      <input type="checkbox" value="SSC" v-model="education" />
       <label>SSC</label>
     </div>
     <div>
-      <input type="checkbox" value="HSC" v-model="names" />
+      <input type="checkbox" value="HSC" v-model="education" />
       <label>HSC</label>
     </div>
     <div>
-      <input type="checkbox" value="Graduation" v-model="names" />
+      <input type="checkbox" value="Graduation" v-model="education" />
       <label>Graduation</label>
     </div>
 
     <label>Skills</label>
-    <input type="text" v-model="tempskills" @keyup="addskills" />
+    <input type="text" v-model="tempskills" @keyup.alt="addskills" />
     <div v-for="skill in skills" :key="skill" class="pills">
-      {{ skill }}
+      <span @click="deleteskills(skill)">{{ skill }}</span>
     </div>
-    <label class="note">Press Alt + ',' to Show the Skills</label>
+    <label class="note">Press Alt + ',' to Enter the Skills</label>
+
+    <div class="terms">
+      <input type="checkbox" v-model="terms" required />
+      <label>Terms and Condition</label>
+    </div>
+
+    <div class="submit">
+      <button>Create An Account</button>
+    </div>
   </form>
 
-  <div class="terms">
-    <input type="checkbox" v-model="terms" required />
-    <label>Terms and Condition</label>
-  </div>
-
-  <div class="show">
+  <!--<div class="show">
     <p>email: {{ email }}</p>
     <p>password: {{ password }}</p>
     <p>Role: {{ role }}</p>
     <p>Terms & Condition: {{ terms }}</p>
-    <p>Education: {{ names }}</p>
-  </div>
+    <p>Education: {{ education }}</p>
+    <p>Skills: {{ skills }}</p>
+  </div> -->
 </template>
 
 <script>
@@ -57,9 +63,10 @@ export default {
       password: "",
       role: "",
       terms: "",
-      names: [],
+      education: [],
       tempskills: "",
       skills: [],
+      passworderror: ''
     };
   },
   methods: {
@@ -71,6 +78,21 @@ export default {
         this.tempskills = "";
       }
     },
+    deleteskills(skill) {
+      this.skills = this.skills.filter((item) => {
+        return skill !== item;
+      });
+    },
+    formsubmit(){
+      this.passworderror = this.password.length > 5 ? '' : "password must be greater than 5 character"
+
+      if(!this.passworderror){
+        console.log('Email : ', this.email)
+        console.log('Role : ', this.role)
+        console.log('Education : ', this.education)
+        console.log('Skills : ', this.skills)
+      }
+    }
   },
 };
 </script>
@@ -153,5 +175,24 @@ input[type="checkbox"] {
   font-size: 12px;
   letter-spacing: 1px;
   cursor: pointer;
+}
+button {
+  color: white;
+  background: #2c3e50;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 0;
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+.submit {
+  text-align: center;
+}
+.error{
+  color: red;
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 </style>
