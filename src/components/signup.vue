@@ -66,7 +66,7 @@ export default {
       education: [],
       tempskills: "",
       skills: [],
-      passworderror: ''
+      passworderror: "",
     };
   },
   methods: {
@@ -83,16 +83,19 @@ export default {
         return skill !== item;
       });
     },
-    formsubmit(){
-      this.passworderror = this.password.length > 5 ? '' : "password must be greater than 5 character"
+    formsubmit() {
+      this.passworderror =
+        this.password.length > 5
+          ? ""
+          : "password must be greater than 5 character";
 
-      if(!this.passworderror){
-        console.log('Email : ', this.email)
-        console.log('Role : ', this.role)
-        console.log('Education : ', this.education)
-        console.log('Skills : ', this.skills)
+      if (!this.passworderror) {
+        console.log("Email : ", this.email);
+        console.log("Role : ", this.role);
+        console.log("Education : ", this.education);
+        console.log("Skills : ", this.skills);
       }
-    }
+    },
   },
 };
 </script>
@@ -188,7 +191,7 @@ button {
 .submit {
   text-align: center;
 }
-.error{
+.error {
   color: red;
   font-size: 0.7em;
   letter-spacing: 1px;
